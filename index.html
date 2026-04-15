@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>公民座標卡牌 Prototype</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <main class="game-shell" aria-label="公民座標卡牌遊戲 Prototype">
+      <canvas id="gameCanvas" aria-label="把卡牌往左或往右滑，測出你的公民座標角色"></canvas>
+      <div class="fallback-actions" aria-hidden="true">
+        <button id="leftButton" type="button">往左</button>
+        <button id="rightButton" type="button">往右</button>
+      </div>
+    </main>
+    <script src="./game.js"></script>
+  </body>
+</html>
