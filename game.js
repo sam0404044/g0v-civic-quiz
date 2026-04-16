@@ -648,9 +648,9 @@ function drawAxisBar(x, y, width, meta, value, showPoles, iconOnly = false) {
 
   if (!iconOnly) {
     ctx.fillStyle = "#18202b";
-    ctx.font = "900 13px sans-serif";
+    ctx.font = "900 12px sans-serif";
     ctx.textAlign = "right";
-    ctx.fillText(value > 0 ? `+${value}` : `${value}`, x + width, y);
+    ctx.fillText(getAxisDirectionLabel(meta, value), x + width, y);
   }
 
   if (!showPoles) return;
@@ -661,6 +661,23 @@ function drawAxisBar(x, y, width, meta, value, showPoles, iconOnly = false) {
   ctx.fillText(meta.minus, x, barY + 14);
   ctx.textAlign = "right";
   ctx.fillText(meta.plus, x + width, barY + 14);
+}
+
+function getAxisDirectionLabel(meta, value) {
+  if (value === 0) return "";
+  return value > 0 ? `偏${meta.plus}` : `偏${meta.minus}`;
+}
+
+function getEffectDirectionLabel(key, value) {
+  const meta = axisMeta[key];
+  if (value === 0) return "不變";
+  return value > 0 ? meta.plus : meta.minus;
+}
+
+function getEffectDirectionColor(key, value) {
+  const meta = axisMeta[key];
+  if (value === 0) return "rgba(24, 32, 43, 0.58)";
+  return value > 0 ? meta.colorPlus : meta.colorMinus;
 }
 
 function drawAxisIcon(key, x, y) {
@@ -789,10 +806,10 @@ function drawDesktopChoicePanel(box, choice, direction, active) {
     ctx.font = "800 13px sans-serif";
     ctx.textAlign = "left";
     ctx.fillText(axisMeta[key].label, box.x + 28, rowY);
-    ctx.fillStyle = effect >= 0 ? "#2f9c78" : "#be4f65";
-    ctx.font = "900 15px sans-serif";
+    ctx.fillStyle = getEffectDirectionColor(key, effect);
+    ctx.font = "900 13px sans-serif";
     ctx.textAlign = "right";
-    ctx.fillText(`${effect >= 0 ? "+" : ""}${effect}`, box.x + box.width - 28, rowY - 1);
+    ctx.fillText(getEffectDirectionLabel(key, effect), box.x + box.width - 28, rowY - 1);
   });
   ctx.restore();
 }
@@ -921,9 +938,9 @@ function drawEffectPreview(card) {
     ctx.textAlign = "left";
     ctx.textBaseline = "top";
     ctx.fillText(axisMeta[key].label, x, y + 10);
-    ctx.fillStyle = value >= 0 ? "#2f9c78" : "#be4f65";
-    ctx.font = "900 17px sans-serif";
-    ctx.fillText(`${value >= 0 ? "+" : ""}${value}`, x, y + 28);
+    ctx.fillStyle = getEffectDirectionColor(key, value);
+    ctx.font = "900 14px sans-serif";
+    ctx.fillText(getEffectDirectionLabel(key, value), x, y + 29);
   });
   ctx.restore();
 }
