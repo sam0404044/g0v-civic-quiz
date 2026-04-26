@@ -6,6 +6,7 @@ const rightButton = document.querySelector("#rightButton");
 const AXIS_LIMIT = 100;
 const MAX_TURNS = 15;
 const SUMMIT_URL = "https://summit.g0v.tw/2026/";
+const SHARE_URL = "https://g0vquiz.playferment.com/";
 
 const stats = {
   x: 0,
@@ -308,7 +309,7 @@ const endings = {
   "--+": {
     role: "體制修補手",
     rope: "細緻而堅韌的絲線",
-    image: "./assets/endings/system-repairer.webp",
+    image: "./assets/endings/system-repairer.png",
     fallbackImage: "./assets/endings/system-repairer.svg",
     summary: "你不一定站在聚光燈下，但你會在科層縫隙裡補上保護網，照顧那些規則沒有看見的人。",
     traits: ["自主隱私：你重視人的尊嚴和安全感。", "韌性連結：你會先把人接住。", "政府體制：你熟悉制度，也知道它哪裡需要修補。"],
@@ -316,7 +317,7 @@ const endings = {
   "++-": {
     role: "議題擴音器",
     rope: "鮮紅色的警示帶",
-    image: "./assets/endings/issue-amplifier.webp",
+    image: "./assets/endings/issue-amplifier.png",
     fallbackImage: "./assets/endings/issue-amplifier.svg",
     summary: "你擅長讓被忽略的問題出圈。當不公義被壓低音量，你會把它變成公共討論。",
     traits: ["開放透明：你相信資訊公開能創造壓力。", "思辨監督：你會指出問題和責任。", "民間草根：你習慣從街頭、網路和社群發動。"],
@@ -324,7 +325,7 @@ const endings = {
   "-+-": {
     role: "邊緣守望犬",
     rope: "帶刺的刺網繩",
-    image: "./assets/endings/edge-watcher.webp",
+    image: "./assets/endings/edge-watcher.png",
     fallbackImage: "./assets/endings/edge-watcher.svg",
     summary: "你對任何形式的權力都保持警覺。即使主流民意很大聲，你仍會守住少數者的位置。",
     traits: ["自主隱私：你在意邊界和安全。", "思辨監督：你不輕易被集體情緒帶走。", "民間草根：你相信體制外也有重要真相。"],
@@ -332,7 +333,7 @@ const endings = {
   "+--": {
     role: "社群點火員",
     rope: "彩色、多股編織的露營繩",
-    image: "./assets/endings/community-igniter.webp",
+    image: "./assets/endings/community-igniter.png",
     fallbackImage: "./assets/endings/community-igniter.svg",
     summary: "你相信改變要從生活周遭做起。比起只指出錯誤，你更喜歡動手把人聚在一起。",
     traits: ["開放透明：你願意分享資源，讓大家都能參與。", "韌性連結：你擅長創造互助的溫度。", "民間草根：你把改變放在日常現場。"],
@@ -340,7 +341,7 @@ const endings = {
   "---": {
     role: "地火互助靈",
     rope: "溫暖、耐操、充滿泥土氣息的麻繩",
-    image: "./assets/endings/mutual-aid-spirit.webp",
+    image: "./assets/endings/mutual-aid-spirit.png",
     fallbackImage: "./assets/endings/mutual-aid-spirit.svg",
     summary: "你相信真正能撐過危機的是彼此。你不急著曝光，而是建立可靠的互助網，在需要時快速接應。",
     traits: ["自主隱私：你重視信任和安全邊界。", "韌性連結：你先照顧人，再討論制度。", "民間草根：你相信底層互助能長出力量。"],
@@ -397,6 +398,7 @@ const state = {
   result: null,
   resultCloseBox: null,
   resultActionBoxes: null,
+  shareCopiedUntil: 0,
 };
 
 function encodeSvg(svg) {
@@ -1426,12 +1428,16 @@ function drawResult() {
       height: closeButtonHeight,
     },
   };
-  drawCanvasActionButton(state.resultActionBoxes.share, "\u5206\u4eab", {
+  drawCanvasActionButton(
+    state.resultActionBoxes.share,
+    performance.now() < state.shareCopiedUntil ? "\u5df2\u8907\u88fd" : "\u5206\u4eab",
+    {
     fill: "#2f6fc2",
     animated: true,
     hover: isPointInside(state.pointer, state.resultActionBoxes.share),
     flat: true,
-  });
+    },
+  );
   drawCanvasActionButton(state.resultActionBoxes.retry, "\u518d\u6e2c\u4e00\u6b21", {
     fill: "#ffffff",
     outline: "#2f6fc2",
@@ -1657,17 +1663,10 @@ function openSummitSite() {
 }
 
 function shareResult() {
-  const shareData = {
-    title: "\u516c\u6c11\u5ea7\u6a19\uff1a\u4f60\u7684\u793e\u6703\u53c3\u8207\u89d2\u8272\u6e2c\u9a57",
-    text: `${state.result.role}\uff1a${state.result.summary}`,
-    url: window.location.href,
-  };
-  if (navigator.share) {
-    navigator.share(shareData).catch(() => {});
-    return;
-  }
   if (navigator.clipboard?.writeText) {
-    navigator.clipboard.writeText(`${shareData.title}` + "\n" + `${shareData.text}` + "\n" + `${shareData.url}`).catch(() => {});
+    navigator.clipboard.writeText(SHARE_URL).then(() => {
+      state.shareCopiedUntil = performance.now() + 2000;
+    }).catch(() => {});
   }
 }
 
@@ -1691,6 +1690,7 @@ function restart() {
   state.result = null;
   state.resultCloseBox = null;
   state.resultActionBoxes = null;
+  state.shareCopiedUntil = 0;
 }
 
 function handleKeydown(event) {
