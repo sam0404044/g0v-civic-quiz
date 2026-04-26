@@ -798,7 +798,7 @@ function drawDesktopChoicePanels(card) {
 }
 
 function drawDesktopChoicePanel(box, choice, direction, active) {
-  const color = direction === "right" ? "#2f9c78" : "#be4f65";
+  const color = direction === "right" ? "#2f9c78" : "#5f6fb0";
   const compact = box.height < 280;
   ctx.save();
   ctx.fillStyle = `rgba(255, 255, 255, ${0.62 + active * 0.28})`;
