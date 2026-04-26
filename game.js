@@ -990,7 +990,7 @@ function drawFlash() {
 
   ctx.save();
   ctx.globalAlpha = alpha;
-  ctx.fillStyle = state.flash.direction === "right" ? "rgba(47, 156, 120, 0.16)" : "rgba(190, 79, 101, 0.16)";
+  ctx.fillStyle = state.flash.direction === "right" ? "rgba(47, 156, 120, 0.16)" : "rgba(95, 111, 176, 0.16)";
   ctx.fillRect(0, 0, state.width, state.height);
 
   ctx.fillStyle = "#18202b";
