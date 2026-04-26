@@ -5,6 +5,7 @@ const rightButton = document.querySelector("#rightButton");
 
 const AXIS_LIMIT = 100;
 const MAX_TURNS = 15;
+const SUMMIT_URL = "https://summit.g0v.tw/2026/";
 
 const stats = {
   x: 0,
@@ -283,66 +284,66 @@ const endings = {
   "+++": {
     role: "政策除塵師",
     rope: "筆直、堅硬的金色尺繩",
-    ropeIcon: "ruler",
+    image: "./assets/endings/policy-dust-cleaner.webp",
+    fallbackImage: "./assets/endings/policy-dust-cleaner.svg",
     summary: "你相信制度能改進，但需要被盯著。你擅長研讀規則、追問預算，讓公共資源站在陽光下。",
     traits: ["開放透明：你願意讓資料被更多人看見。", "思辨監督：你會追問權力如何被使用。", "政府體制：你傾向進入制度內推動改變。"],
-    mission: "年會任務：找找看【社群點火員】，他們能把你的專業資料帶進生活現場。",
   },
   "-++": {
     role: "數位人權盾",
     rope: "黑色與銀色交織的鎖鏈",
-    ropeIcon: "chain",
+    image: "./assets/endings/digital-human-rights-shield.webp",
+    fallbackImage: "./assets/endings/digital-human-rights-shield.svg",
     summary: "你重視效率，也更在意權利邊界。當科技和治理靠近個人生活，你會先確認防線在哪裡。",
     traits: ["自主隱私：你會守住個資和個人空間。", "思辨監督：你對權力保持清醒質疑。", "政府體制：你願意用制度語言爭取保障。"],
-    mission: "年會任務：找找看【公私協力員】，他們能幫你把防線翻成可執行的政策流程。",
   },
   "+-+": {
     role: "公私協力員",
     rope: "柔軟且帶吸附力的魔鬼氈繩",
-    ropeIcon: "velcro",
+    image: "./assets/endings/public-private-collaborator.webp",
+    fallbackImage: "./assets/endings/public-private-collaborator.svg",
     summary: "你是不同世界之間的譯者。你相信合作大於對抗，會把政策變成大家聽得懂、接得住的內容。",
     traits: ["開放透明：你願意共享資訊和工具。", "韌性連結：你擅長把人黏在一起。", "政府體制：你能在制度內找到合作入口。"],
-    mission: "年會任務：找找看【邊緣守望犬】，他們能提醒你合作時別忽略權力差距。",
   },
   "--+": {
     role: "體制修補手",
     rope: "細緻而堅韌的絲線",
-    ropeIcon: "silk",
+    image: "./assets/endings/system-repairer.webp",
+    fallbackImage: "./assets/endings/system-repairer.svg",
     summary: "你不一定站在聚光燈下，但你會在科層縫隙裡補上保護網，照顧那些規則沒有看見的人。",
     traits: ["自主隱私：你重視人的尊嚴和安全感。", "韌性連結：你會先把人接住。", "政府體制：你熟悉制度，也知道它哪裡需要修補。"],
-    mission: "年會任務：找找看【議題擴音器】，他們能讓你看見的漏洞被更多人聽見。",
   },
   "++-": {
     role: "議題擴音器",
     rope: "鮮紅色的警示帶",
-    ropeIcon: "warning",
+    image: "./assets/endings/issue-amplifier.webp",
+    fallbackImage: "./assets/endings/issue-amplifier.svg",
     summary: "你擅長讓被忽略的問題出圈。當不公義被壓低音量，你會把它變成公共討論。",
     traits: ["開放透明：你相信資訊公開能創造壓力。", "思辨監督：你會指出問題和責任。", "民間草根：你習慣從街頭、網路和社群發動。"],
-    mission: "年會任務：找找看【體制修補手】，他們知道議題進入制度後會卡在哪裡。",
   },
   "-+-": {
     role: "邊緣守望犬",
     rope: "帶刺的刺網繩",
-    ropeIcon: "barbed",
+    image: "./assets/endings/edge-watcher.webp",
+    fallbackImage: "./assets/endings/edge-watcher.svg",
     summary: "你對任何形式的權力都保持警覺。即使主流民意很大聲，你仍會守住少數者的位置。",
     traits: ["自主隱私：你在意邊界和安全。", "思辨監督：你不輕易被集體情緒帶走。", "民間草根：你相信體制外也有重要真相。"],
-    mission: "年會任務：找找看【公私協力員】，他們可以幫你把尖銳提醒帶進協作桌上。",
   },
   "+--": {
     role: "社群點火員",
     rope: "彩色、多股編織的露營繩",
-    ropeIcon: "camp",
+    image: "./assets/endings/community-igniter.webp",
+    fallbackImage: "./assets/endings/community-igniter.svg",
     summary: "你相信改變要從生活周遭做起。比起只指出錯誤，你更喜歡動手把人聚在一起。",
     traits: ["開放透明：你願意分享資源，讓大家都能參與。", "韌性連結：你擅長創造互助的溫度。", "民間草根：你把改變放在日常現場。"],
-    mission: "年會任務：找找看【政策除塵師】，他們有你需要的專業資料，而你有他們缺少的民間能量。",
   },
   "---": {
     role: "地火互助靈",
     rope: "溫暖、耐操、充滿泥土氣息的麻繩",
-    ropeIcon: "hemp",
+    image: "./assets/endings/mutual-aid-spirit.webp",
+    fallbackImage: "./assets/endings/mutual-aid-spirit.svg",
     summary: "你相信真正能撐過危機的是彼此。你不急著曝光，而是建立可靠的互助網，在需要時快速接應。",
     traits: ["自主隱私：你重視信任和安全邊界。", "韌性連結：你先照顧人，再討論制度。", "民間草根：你相信底層互助能長出力量。"],
-    mission: "年會任務：找找看【數位人權盾】，他們能幫你的互助網避開資料風險。",
   },
 };
 
@@ -365,6 +366,20 @@ const artImages = Object.fromEntries(
   }),
 );
 
+const endingImages = Object.fromEntries(
+  Object.entries(endings).map(([key, ending]) => {
+    const image = new Image();
+    image.src = ending.image;
+    if (ending.fallbackImage) {
+      image.onerror = () => {
+        image.onerror = null;
+        image.src = ending.fallbackImage;
+      };
+    }
+    return [key, image];
+  }),
+);
+
 const state = {
   width: 0,
   height: 0,
@@ -372,12 +387,16 @@ const state = {
   index: 0,
   deck: [...cards],
   drag: { active: false, startX: 0, startY: 0, x: 0, y: 0 },
+  pointer: { x: -9999, y: -9999 },
   cardX: 0,
   cardY: 0,
   rotation: 0,
   exiting: null,
   flash: null,
+  calculatingUntil: 0,
   result: null,
+  resultCloseBox: null,
+  resultActionBoxes: null,
 };
 
 function encodeSvg(svg) {
@@ -599,7 +618,7 @@ function drawDesktopAxes() {
   const y = 24;
   const keys = ["x", "y", "z"];
 
-  ctx.fillStyle = "rgba(255, 255, 255, 0.72)";
+  ctx.fillStyle = "rgba(255, 255, 255, 0.82)";
   roundedRect(x, y, panelWidth, 258, 8);
   ctx.fill();
   ctx.strokeStyle = "rgba(24, 32, 43, 0.12)";
@@ -930,17 +949,21 @@ function drawEffectPreview(card) {
   roundedRect(18, y, state.width - 36, 52, 8);
   ctx.fill();
 
+  const boxX = 18;
+  const boxWidth = state.width - 36;
+  const columnWidth = boxWidth / 3;
+
   keys.forEach((key, index) => {
     const value = effects[key] || 0;
-    const x = 36 + index * ((state.width - 72) / 3);
+    const centerX = boxX + columnWidth * index + columnWidth / 2;
     ctx.fillStyle = axisMeta[key].colorPlus;
     ctx.font = "900 12px sans-serif";
-    ctx.textAlign = "left";
+    ctx.textAlign = "center";
     ctx.textBaseline = "top";
-    ctx.fillText(axisMeta[key].label, x, y + 10);
+    ctx.fillText(axisMeta[key].label, centerX, y + 10);
     ctx.fillStyle = getEffectDirectionColor(key, value);
     ctx.font = "900 14px sans-serif";
-    ctx.fillText(getEffectDirectionLabel(key, value), x, y + 29);
+    ctx.fillText(getEffectDirectionLabel(key, value), centerX, y + 29);
   });
   ctx.restore();
 }
@@ -978,238 +1001,494 @@ function drawFlash() {
   ctx.restore();
 }
 
-function drawRopeIconCard(type, centerX, top, size) {
+function drawEndingImageCard(resultKey, centerX, top, size) {
   const x = centerX - size / 2;
   const y = top;
+  const image = endingImages[resultKey];
+
   ctx.save();
-  ctx.fillStyle = "#f5f7f4";
-  roundedRect(x, y, size, size * 0.62, 8);
+  const panelHeight = size * 0.92;
+  const panelY = y;
+  const glow = ctx.createLinearGradient(x, panelY, x + size, panelY + panelHeight);
+  glow.addColorStop(0, "#f7f1e6");
+  glow.addColorStop(1, "#efe6d7");
+  ctx.fillStyle = glow;
+  roundedRect(x, panelY, size, panelHeight, 16);
   ctx.fill();
+  ctx.strokeStyle = "rgba(24, 32, 43, 0.12)";
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  if (image?.complete) {
+    ctx.save();
+    roundedRect(x, panelY, size, panelHeight, 16);
+    ctx.clip();
+    ctx.drawImage(image, x, panelY, size, panelHeight);
+    ctx.restore();
+  }
+  ctx.restore();
+}
+
+function drawCanvasActionButton(box, label, options = {}) {
+  const {
+    fill = "#2f9c78",
+    outline = null,
+    textColor = "#ffffff",
+    animated = false,
+    hover = false,
+    flat = false,
+  } = options;
+  ctx.save();
+  const pulse = animated ? (Math.sin(performance.now() * 0.006) + 1) * 0.5 : 0;
+  const hoverBoost = hover ? 0.12 : 0;
+  ctx.shadowColor = animated || hover ? `rgba(47, 156, 120, ${0.12 + pulse * 0.08 + hoverBoost})` : "transparent";
+  ctx.shadowBlur = animated || hover ? 16 + pulse * 8 + (hover ? 6 : 0) : 0;
+  if (flat) {
+    ctx.fillStyle = fill;
+  } else {
+    const gradient = ctx.createLinearGradient(box.x, box.y, box.x, box.y + box.height);
+    gradient.addColorStop(0, fill);
+    gradient.addColorStop(1, animated ? "#278867" : fill);
+    ctx.fillStyle = gradient;
+  }
+  roundedRect(box.x, box.y, box.width, box.height, 12);
+  ctx.fill();
+  if (outline) {
+    ctx.shadowBlur = 0;
+    ctx.strokeStyle = outline;
+    ctx.lineWidth = hover ? 1.8 : 1.4;
+    ctx.stroke();
+  } else if (animated) {
+    ctx.shadowBlur = 0;
+    ctx.strokeStyle = `rgba(255, 255, 255, ${0.16 + pulse * 0.12})`;
+    ctx.lineWidth = 1.2;
+    ctx.stroke();
+  }
+  ctx.fillStyle = textColor;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.font = `900 ${Math.round(Math.min(18, box.height * 0.38))}px sans-serif`;
+  ctx.fillText(label, box.x + box.width / 2, box.y + box.height / 2);
+  ctx.restore();
+}
+
+function drawRadarChart(centerX, centerY, radius, values, bounds = null) {
+  const axes = [
+    { label: "\u8cc7\u8a0a\u6d41\u5411", color: "#54d1c3", angle: -Math.PI / 2 },
+    { label: "\u4e92\u52d5\u6a21\u5f0f", color: "#d7749a", angle: Math.PI / 6 },
+    { label: "\u884c\u52d5\u5834\u57df", color: "#67b1e7", angle: (5 * Math.PI) / 6 },
+  ];
+  const ringCount = 3;
+  const points = axes.map((axis, index) => {
+    const ratio = Math.max(0.22, Math.min(1, Math.abs(values[index]) / AXIS_LIMIT));
+    return {
+      x: centerX + Math.cos(axis.angle) * radius * ratio,
+      y: centerY + Math.sin(axis.angle) * radius * ratio,
+    };
+  });
+
+  ctx.save();
+
+  const halo = ctx.createRadialGradient(centerX, centerY, radius * 0.12, centerX, centerY, radius * 1.08);
+  halo.addColorStop(0, "rgba(47, 156, 120, 0.12)");
+  halo.addColorStop(1, "rgba(47, 156, 120, 0)");
+  ctx.fillStyle = halo;
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, radius * 1.08, 0, Math.PI * 2);
+  ctx.fill();
+
+  for (let ring = ringCount; ring >= 1; ring -= 1) {
+    const ringRadius = (radius / ringCount) * ring;
+    ctx.beginPath();
+    axes.forEach((axis, index) => {
+      const x = centerX + Math.cos(axis.angle) * ringRadius;
+      const y = centerY + Math.sin(axis.angle) * ringRadius;
+      if (index === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    });
+    ctx.closePath();
+    ctx.fillStyle = ring % 2 === 0 ? "rgba(47, 156, 120, 0.03)" : "rgba(103, 177, 231, 0.045)";
+    ctx.fill();
+    ctx.strokeStyle = ring === ringCount ? "rgba(24, 32, 43, 0.18)" : "rgba(24, 32, 43, 0.08)";
+    ctx.lineWidth = ring === ringCount ? 1.2 : 1;
+    ctx.stroke();
+  }
+
+  axes.forEach((axis) => {
+    const outerX = centerX + Math.cos(axis.angle) * radius;
+    const outerY = centerY + Math.sin(axis.angle) * radius;
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.lineTo(outerX, outerY);
+    ctx.strokeStyle = "rgba(24, 32, 43, 0.12)";
+    ctx.lineWidth = 1.2;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.fillStyle = axis.color;
+    ctx.arc(outerX, outerY, 3.5, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  const polygonFill = ctx.createLinearGradient(centerX, centerY - radius, centerX, centerY + radius);
+  polygonFill.addColorStop(0, "rgba(47, 156, 120, 0.28)");
+  polygonFill.addColorStop(1, "rgba(103, 177, 231, 0.18)");
+  ctx.beginPath();
+  points.forEach((point, index) => {
+    if (index === 0) ctx.moveTo(point.x, point.y);
+    else ctx.lineTo(point.x, point.y);
+  });
+  ctx.closePath();
+  ctx.fillStyle = polygonFill;
+  ctx.fill();
+  ctx.strokeStyle = "#2f9c78";
+  ctx.lineWidth = 2;
+  ctx.shadowColor = "rgba(47, 156, 120, 0.16)";
+  ctx.shadowBlur = 10;
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  const innerBorderScale = 0.52;
+  ctx.beginPath();
+  axes.forEach((axis, index) => {
+    const x = centerX + Math.cos(axis.angle) * radius * innerBorderScale;
+    const y = centerY + Math.sin(axis.angle) * radius * innerBorderScale;
+    if (index === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  });
+  ctx.closePath();
   ctx.strokeStyle = "rgba(24, 32, 43, 0.1)";
   ctx.lineWidth = 1;
   ctx.stroke();
-  ctx.translate(centerX, y + size * 0.31);
-  drawRopeIcon(type, size);
-  ctx.restore();
-}
 
-function drawRopeIcon(type, size) {
-  const w = size * 0.68;
-  if (type === "ruler") drawRulerRope(w);
-  if (type === "chain") drawChainRope(w);
-  if (type === "velcro") drawVelcroRope(w);
-  if (type === "silk") drawSilkRope(w);
-  if (type === "warning") drawWarningRope(w);
-  if (type === "barbed") drawBarbedRope(w);
-  if (type === "camp") drawCampRope(w);
-  if (type === "hemp") drawHempRope(w);
-}
-
-function drawRulerRope(width) {
-  ctx.save();
-  ctx.rotate(-0.08);
-  ctx.strokeStyle = "#c99a22";
-  ctx.lineWidth = 15;
-  ctx.lineCap = "round";
-  ctx.beginPath();
-  ctx.moveTo(-width / 2, 0);
-  ctx.lineTo(width / 2, 0);
-  ctx.stroke();
-  ctx.strokeStyle = "#fff1ba";
-  ctx.lineWidth = 3;
-  for (let x = -width / 2 + 12; x < width / 2; x += 14) {
+  points.forEach((point, index) => {
     ctx.beginPath();
-    ctx.moveTo(x, -7);
-    ctx.lineTo(x, x % 28 === 0 ? 7 : 3);
-    ctx.stroke();
-  }
-  ctx.restore();
-}
-
-function drawChainRope(width) {
-  ctx.save();
-  ctx.lineWidth = 7;
-  ctx.strokeStyle = "#30343a";
-  for (let i = 0; i < 5; i += 1) {
-    const x = -width / 2 + i * (width / 4);
-    ctx.save();
-    ctx.translate(x, 0);
-    ctx.rotate(i % 2 === 0 ? 0.75 : -0.75);
-    roundedRect(-16, -10, 32, 20, 8);
-    ctx.stroke();
-    ctx.restore();
-  }
-  ctx.strokeStyle = "#cfd4da";
-  ctx.lineWidth = 3;
-  ctx.beginPath();
-  ctx.moveTo(-width / 2 + 10, -10);
-  ctx.lineTo(width / 2 - 10, 10);
-  ctx.stroke();
-  ctx.restore();
-}
-
-function drawVelcroRope(width) {
-  ctx.save();
-  ctx.strokeStyle = "#2f9c78";
-  ctx.lineWidth = 13;
-  ctx.lineCap = "round";
-  ctx.beginPath();
-  ctx.moveTo(-width / 2, 0);
-  ctx.bezierCurveTo(-width * 0.2, -18, width * 0.2, 18, width / 2, 0);
-  ctx.stroke();
-  ctx.strokeStyle = "#86cbb5";
-  ctx.lineWidth = 3;
-  for (let x = -width / 2 + 12; x < width / 2; x += 15) {
-    ctx.beginPath();
-    ctx.moveTo(x, -8);
-    ctx.lineTo(x + 6, -16);
-    ctx.moveTo(x, 8);
-    ctx.lineTo(x + 6, 16);
-    ctx.stroke();
-  }
-  ctx.restore();
-}
-
-function drawSilkRope(width) {
-  ctx.save();
-  ctx.strokeStyle = "#d08b2c";
-  ctx.lineWidth = 4;
-  ctx.lineCap = "round";
-  for (let i = 0; i < 5; i += 1) {
-    ctx.beginPath();
-    ctx.moveTo(-width / 2, -8 + i * 4);
-    ctx.bezierCurveTo(-width * 0.18, -24 + i * 5, width * 0.18, 24 - i * 5, width / 2, -8 + i * 4);
-    ctx.stroke();
-  }
-  ctx.fillStyle = "#be4f65";
-  ctx.beginPath();
-  ctx.arc(width / 2 - 4, 0, 5, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.restore();
-}
-
-function drawWarningRope(width) {
-  ctx.save();
-  ctx.rotate(-0.06);
-  ctx.fillStyle = "#be4f65";
-  roundedRect(-width / 2, -12, width, 24, 4);
-  ctx.fill();
-  ctx.fillStyle = "#fff1ba";
-  for (let x = -width / 2 - 8; x < width / 2; x += 26) {
-    ctx.save();
-    ctx.translate(x, 0);
-    ctx.rotate(-0.55);
-    ctx.fillRect(-5, -18, 10, 36);
-    ctx.restore();
-  }
-  ctx.restore();
-}
-
-function drawBarbedRope(width) {
-  ctx.save();
-  ctx.strokeStyle = "#4b5560";
-  ctx.lineWidth = 5;
-  ctx.lineCap = "round";
-  ctx.beginPath();
-  ctx.moveTo(-width / 2, -4);
-  ctx.lineTo(width / 2, 4);
-  ctx.moveTo(-width / 2, 5);
-  ctx.lineTo(width / 2, -5);
-  ctx.stroke();
-  ctx.strokeStyle = "#be4f65";
-  ctx.lineWidth = 3;
-  for (let x = -width / 2 + 14; x < width / 2; x += 22) {
-    ctx.beginPath();
-    ctx.moveTo(x, 0);
-    ctx.lineTo(x - 7, -12);
-    ctx.moveTo(x, 0);
-    ctx.lineTo(x + 8, 12);
-    ctx.stroke();
-  }
-  ctx.restore();
-}
-
-function drawCampRope(width) {
-  ctx.save();
-  const colors = ["#2f9c78", "#d08b2c", "#5f6fb0"];
-  colors.forEach((color, index) => {
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 5;
-    ctx.lineCap = "round";
-    ctx.beginPath();
-    ctx.moveTo(-width / 2, -8 + index * 8);
-    ctx.bezierCurveTo(-width * 0.18, 8 - index * 6, width * 0.18, -22 + index * 11, width / 2, -8 + index * 8);
+    ctx.fillStyle = axes[index].color;
+    ctx.arc(point.x, point.y, 5.5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.86)";
+    ctx.lineWidth = 2;
     ctx.stroke();
   });
-  ctx.strokeStyle = "#18202b";
-  ctx.lineWidth = 3;
-  ctx.beginPath();
-  ctx.arc(-width * 0.28, 0, 13, 0.3, Math.PI * 1.7);
-  ctx.stroke();
-  ctx.restore();
-}
 
-function drawHempRope(width) {
-  ctx.save();
-  ctx.strokeStyle = "#9b6a35";
-  ctx.lineWidth = 9;
-  ctx.lineCap = "round";
-  for (let i = 0; i < 3; i += 1) {
-    ctx.beginPath();
-    ctx.moveTo(-width / 2, -8 + i * 8);
-    ctx.bezierCurveTo(-width * 0.22, 12 - i * 8, width * 0.22, -12 + i * 8, width / 2, -8 + i * 8);
+  ctx.beginPath();
+  ctx.fillStyle = "rgba(24, 32, 43, 0.58)";
+  ctx.arc(centerX, centerY, 2.5, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.font = "700 11px sans-serif";
+  ctx.textBaseline = "middle";
+  axes.forEach((axis) => {
+    const pointX = centerX + Math.cos(axis.angle) * radius;
+    const pointY = centerY + Math.sin(axis.angle) * radius;
+    const x = axis.angle === -Math.PI / 2 ? pointX : pointX + (Math.cos(axis.angle) > 0 ? 26 : -26);
+    const y = axis.angle === -Math.PI / 2 ? pointY - 24 : pointY + 14;
+    const textWidth = ctx.measureText(axis.label).width;
+    const align = axis.angle === -Math.PI / 2 ? "center" : Math.cos(axis.angle) > 0 ? "left" : "right";
+    let boxX = x - textWidth / 2 - 8;
+    if (align === "left") boxX = x - 6;
+    if (align === "right") boxX = x - textWidth - 10;
+    let boxY = y - 12;
+    if (bounds) {
+      const minX = bounds.x + 8;
+      const maxX = bounds.x + bounds.width - (textWidth + 16) - 8;
+      const minY = bounds.y + 8;
+      const maxY = bounds.y + bounds.height - 24 - 8;
+      boxX = Math.max(minX, Math.min(maxX, boxX));
+      boxY = Math.max(minY, Math.min(maxY, boxY));
+    }
+    const textX =
+      align === "center"
+        ? boxX + (textWidth + 16) / 2
+        : align === "left"
+          ? boxX + 8
+          : boxX + textWidth + 8;
+    const textY = boxY + 12;
+
+    ctx.fillStyle = "rgba(255, 255, 255, 0.82)";
+    roundedRect(boxX, boxY, textWidth + 16, 24, 12);
+    ctx.fill();
+    ctx.strokeStyle = "rgba(24, 32, 43, 0.08)";
+    ctx.lineWidth = 1;
     ctx.stroke();
-  }
-  ctx.strokeStyle = "#d8b27a";
-  ctx.lineWidth = 2;
-  for (let x = -width / 2 + 8; x < width / 2; x += 12) {
-    ctx.beginPath();
-    ctx.moveTo(x, -13);
-    ctx.lineTo(x + 8, 13);
-    ctx.stroke();
-  }
+
+    ctx.fillStyle = "rgba(24, 32, 43, 0.68)";
+    ctx.textAlign = align;
+    ctx.fillText(axis.label, textX, textY);
+  });
+
   ctx.restore();
 }
 
 function drawResult() {
-  if (!state.result) return;
+  if (!state.result) {
+    state.resultCloseBox = null;
+    state.resultActionBoxes = null;
+    return;
+  }
   const result = state.result;
+  const resultKey = getEndingKey();
 
   ctx.save();
-  ctx.fillStyle = "rgba(24, 32, 43, 0.72)";
+  ctx.fillStyle = "rgba(248, 244, 236, 0.78)";
   ctx.fillRect(0, 0, state.width, state.height);
 
-  const modalWidth = Math.min(state.width - 40, isDesktopLayout() ? 620 : 430);
-  const modalHeight = Math.min(state.height - 44, isDesktopLayout() ? 560 : 620);
+  const modalWidth = Math.min(state.width - 20, isDesktopLayout() ? 700 : 430);
+  const modalHeight = state.height - 16;
   const modalX = state.width * 0.5 - modalWidth / 2;
   const modalY = state.height * 0.5 - modalHeight / 2;
+  const compactScale = isDesktopLayout() ? 1 : Math.max(0.76, Math.min(1, modalHeight / 780));
+  const innerPad = isDesktopLayout() ? 28 : Math.max(16, Math.round(20 * compactScale));
 
-  ctx.fillStyle = "#ffffff";
+  const border = "#d8cfbf";
+  const modalGradient = ctx.createLinearGradient(modalX, modalY, modalX, modalY + modalHeight);
+  modalGradient.addColorStop(0, "#fbf8f2");
+  modalGradient.addColorStop(1, "#f3eee4");
+  ctx.fillStyle = modalGradient;
   roundedRect(modalX, modalY, modalWidth, modalHeight, 8);
   ctx.fill();
+  ctx.strokeStyle = border;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  const eyebrowFont = `700 ${Math.round((isDesktopLayout() ? 15 : 13) * compactScale)}px sans-serif`;
+  const titleFont = `900 ${Math.round((isDesktopLayout() ? 32 : 22) * compactScale)}px sans-serif`;
+  const summaryFont = `700 ${Math.round((isDesktopLayout() ? 15 : 13) * compactScale)}px sans-serif`;
+  const traitTitleFont = `900 ${Math.round((isDesktopLayout() ? 15 : 14) * compactScale)}px sans-serif`;
+  const traitFont = `700 ${Math.round((isDesktopLayout() ? 14 : 13) * compactScale)}px sans-serif`;
+  const hintFont = `700 ${Math.round((isDesktopLayout() ? 13 : 12) * compactScale)}px sans-serif`;
+
+  const titleBlockHeight = Math.round(74 * compactScale);
+  const endingImageSize = Math.min(
+    modalWidth * (isDesktopLayout() ? 0.68 : 0.54),
+    modalHeight * (isDesktopLayout() ? 0.24 : 0.18),
+  );
+  const summaryLineHeight = Math.round((isDesktopLayout() ? 22 : 18) * compactScale);
+  const summaryMaxLines = isDesktopLayout() ? 4 : 3;
+  const summaryHeight =
+    Math.min(wrapText(result.summary, modalWidth - innerPad * 2 - 8, summaryFont).length, summaryMaxLines) *
+    summaryLineHeight;
+  const radarCardHeight = Math.round(
+    Math.min(
+      isDesktopLayout() ? 190 : 170,
+      Math.max(isDesktopLayout() ? 160 : 142, modalHeight * (isDesktopLayout() ? 0.25 : 0.25)),
+    ),
+  );
+  const traitTitleHeight = Math.round(24 * compactScale);
+  const traitLineHeight = Math.round((isDesktopLayout() ? 18 : 16) * compactScale);
+  const traitGap = Math.round((isDesktopLayout() ? 12 : 8) * compactScale);
+  const traitBlockHeight = result.traits.reduce((total, trait, index) => {
+    const lines = Math.min(wrapText(trait, modalWidth - innerPad * 2, traitFont).length, 2);
+    return total + lines * traitLineHeight + (index === result.traits.length - 1 ? 0 : traitGap);
+  }, 0);
+  const closeButtonHeight = Math.round((isDesktopLayout() ? 54 : 46) * compactScale);
+  const hintOffset = Math.round(12 * compactScale);
+  const hintHeight = Math.round(18 * compactScale);
+
+  const titleHeight = titleBlockHeight;
+  const imageHeight = endingImageSize * 0.92;
+  const summaryBlockHeight = summaryHeight;
+  const radarBlockHeight = radarCardHeight;
+  const traitsBlockHeight = traitTitleHeight + traitBlockHeight;
+  const actionsBlockHeight = closeButtonHeight + hintOffset + hintHeight;
+  const totalBlockHeight =
+    titleHeight +
+    imageHeight +
+    summaryBlockHeight +
+    radarBlockHeight +
+    traitsBlockHeight +
+    actionsBlockHeight;
+  const evenlyGap = Math.max(Math.round(8 * compactScale), (modalHeight - totalBlockHeight) / 7);
+
+  let cursorY = modalY + evenlyGap;
+  const titleTop = cursorY;
+  cursorY += titleHeight + evenlyGap;
+  const imageTop = cursorY;
+  cursorY += imageHeight + evenlyGap;
+  const summaryTop = cursorY;
+  cursorY += summaryBlockHeight + evenlyGap;
+  const radarCardX = modalX + innerPad;
+  const radarCardY = cursorY;
+  const radarCardWidth = modalWidth - innerPad * 2;
+  cursorY += radarBlockHeight + evenlyGap;
+  const traitsTop = cursorY;
+  cursorY += traitsBlockHeight + evenlyGap;
 
   ctx.fillStyle = "#18202b";
   ctx.textAlign = "center";
   ctx.textBaseline = "top";
-  ctx.font = "900 17px sans-serif";
-  ctx.fillText("你的公民成色是", state.width / 2, modalY + 24);
-  ctx.font = "900 30px sans-serif";
-  ctx.fillText(`【${result.role}】`, state.width / 2, modalY + 54);
+  ctx.font = eyebrowFont;
+  ctx.fillText("\u4f60\u7684\u516c\u6c11\u6210\u8272\u662f", state.width / 2, titleTop);
+  ctx.font = titleFont;
+  ctx.fillText(`\u3010${result.role}\u3011`, state.width / 2, titleTop + Math.round(28 * compactScale));
 
-  drawRopeIconCard(result.ropeIcon, state.width / 2, modalY + 108, Math.min(132, modalWidth - 96));
+  const decorY = titleTop + Math.round(80 * compactScale);
+  const decorWidth = Math.min(112, modalWidth * 0.18);
+  const decorHeight = Math.max(4, Math.round(4 * compactScale));
+  const decorGap = Math.max(6, Math.round(6 * compactScale));
+  const decorSegmentWidth = (decorWidth - decorGap) / 2;
+  const decorStartX = state.width / 2 - decorWidth / 2;
+  const leftDecor = ctx.createLinearGradient(decorStartX, decorY, decorStartX + decorSegmentWidth, decorY);
+  leftDecor.addColorStop(0, "#8ebcf1");
+  leftDecor.addColorStop(1, "#d8e8fb");
+  const rightDecor = ctx.createLinearGradient(
+    decorStartX + decorSegmentWidth + decorGap,
+    decorY,
+    decorStartX + decorWidth,
+    decorY,
+  );
+  rightDecor.addColorStop(0, "#f5d5dc");
+  rightDecor.addColorStop(1, "#eca7b4");
+  ctx.fillStyle = leftDecor;
+  roundedRect(decorStartX, decorY, decorSegmentWidth, decorHeight, decorHeight / 2);
+  ctx.fill();
+  ctx.fillStyle = rightDecor;
+  roundedRect(
+    decorStartX + decorSegmentWidth + decorGap,
+    decorY,
+    decorSegmentWidth,
+    decorHeight,
+    decorHeight / 2,
+  );
+  ctx.fill();
 
-  drawText(result.summary, state.width / 2, modalY + 198, modalWidth - 56, 25, "700 16px sans-serif", "#4d5965", "center", 4);
+  drawEndingImageCard(resultKey, state.width / 2, imageTop, endingImageSize);
+
+  drawText(
+    result.summary,
+    state.width / 2,
+    summaryTop,
+    modalWidth - innerPad * 2 - 8,
+    summaryLineHeight,
+    summaryFont,
+    "rgba(24, 32, 43, 0.78)",
+    "center",
+    summaryMaxLines,
+  );
+
+  ctx.fillStyle = "rgba(255, 255, 255, 0.66)";
+  roundedRect(radarCardX, radarCardY, radarCardWidth, radarCardHeight, 16);
+  ctx.fill();
+  ctx.strokeStyle = "rgba(24, 32, 43, 0.08)";
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  drawRadarChart(
+    state.width / 2,
+    radarCardY + radarCardHeight / 2 + 4,
+    Math.min(isDesktopLayout() ? 60 : 50, radarCardHeight * 0.3),
+    [stats.x, stats.y, stats.z],
+    { x: radarCardX, y: radarCardY, width: radarCardWidth, height: radarCardHeight },
+  );
 
   ctx.textAlign = "left";
   ctx.fillStyle = "#18202b";
-  ctx.font = "900 15px sans-serif";
-  ctx.fillText("屬性解析", modalX + 28, modalY + 306);
+  ctx.font = traitTitleFont;
+  ctx.fillText("\u5c6c\u6027\u89e3\u6790", modalX + innerPad, traitsTop);
+
+  let traitY = traitsTop + traitTitleHeight;
   result.traits.forEach((trait, index) => {
-    drawText(trait, modalX + 28, modalY + 332 + index * 39, modalWidth - 56, 21, "700 14px sans-serif", "#4d5965", "left", 2);
+    const traitHeight = drawText(
+      trait,
+      modalX + innerPad,
+      traitY,
+      modalWidth - innerPad * 2,
+      traitLineHeight,
+      traitFont,
+      "rgba(24, 32, 43, 0.72)",
+      "left",
+      2,
+    );
+    traitY += traitHeight + (index === result.traits.length - 1 ? 0 : traitGap);
   });
 
-  drawText(result.mission, modalX + 28, modalY + modalHeight - 92, modalWidth - 56, 23, "800 15px sans-serif", "#2f6f61", "left", 3);
+  const actionGap = Math.max(8, Math.round(10 * compactScale));
+  const actionButtonWidth = (modalWidth - innerPad * 2 - actionGap * 2) / 3;
+  const actionButtonY = cursorY;
+  state.resultCloseBox = null;
+  state.resultActionBoxes = {
+    share: {
+      x: modalX + innerPad,
+      y: actionButtonY,
+      width: actionButtonWidth,
+      height: closeButtonHeight,
+    },
+    retry: {
+      x: modalX + innerPad + actionButtonWidth + actionGap,
+      y: actionButtonY,
+      width: actionButtonWidth,
+      height: closeButtonHeight,
+    },
+    site: {
+      x: modalX + innerPad + (actionButtonWidth + actionGap) * 2,
+      y: actionButtonY,
+      width: actionButtonWidth,
+      height: closeButtonHeight,
+    },
+  };
+  drawCanvasActionButton(state.resultActionBoxes.share, "\u5206\u4eab", {
+    fill: "#2f6fc2",
+    animated: true,
+    hover: isPointInside(state.pointer, state.resultActionBoxes.share),
+    flat: true,
+  });
+  drawCanvasActionButton(state.resultActionBoxes.retry, "\u518d\u6e2c\u4e00\u6b21", {
+    fill: "#ffffff",
+    outline: "#2f6fc2",
+    textColor: "#2f6fc2",
+    hover: isPointInside(state.pointer, state.resultActionBoxes.retry),
+  });
+  drawCanvasActionButton(state.resultActionBoxes.site, "\u524d\u5f80\u5b98\u7db2", {
+    fill: "#ffffff",
+    outline: "#2f9c78",
+    textColor: "#2f9c78",
+    hover: isPointInside(state.pointer, state.resultActionBoxes.site),
+  });
 
+  ctx.fillStyle = "rgba(24, 32, 43, 0.48)";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "top";
+  ctx.font = hintFont;
+  ctx.fillText(
+    "\ud83d\udcf8 \u622a\u5716\u6b64\u756b\u9762\u5373\u53ef\u4fdd\u5b58\u5206\u4eab",
+    state.width / 2,
+    actionButtonY + closeButtonHeight + hintOffset,
+  );
+
+  ctx.restore();
+}
+
+function drawCalculating() {
+  if (!state.calculatingUntil || state.result) return;
+
+  ctx.save();
+  ctx.fillStyle = "rgba(248, 244, 236, 0.84)";
+  ctx.fillRect(0, 0, state.width, state.height);
+
+  const boxWidth = Math.min(state.width - 40, 360);
+  const boxHeight = 120;
+  const boxX = state.width / 2 - boxWidth / 2;
+  const boxY = state.height / 2 - boxHeight / 2;
+  ctx.fillStyle = "#f7f2e8";
+  roundedRect(boxX, boxY, boxWidth, boxHeight, 12);
+  ctx.fill();
+  ctx.strokeStyle = "rgba(24, 32, 43, 0.12)";
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  const remaining = Math.max(0, state.calculatingUntil - performance.now());
+  const dotCount = 3;
+  const phase = Math.floor((2600 - remaining) / 350) % (dotCount + 1);
+  const dots = ".".repeat(Math.max(0, Math.min(dotCount, phase)));
+
+  ctx.fillStyle = "#18202b";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.font = "900 24px sans-serif";
+  ctx.fillText(`\u6b63\u5728\u8a08\u7b97\u7d50\u679c${dots}`, state.width / 2, boxY + 50);
+  ctx.fillStyle = "rgba(24, 32, 43, 0.56)";
+  ctx.font = "700 14px sans-serif";
+  ctx.fillText("\u8acb\u7a0d\u5019", state.width / 2, boxY + 84);
   ctx.restore();
 }
 
@@ -1218,16 +1497,22 @@ function draw() {
   drawAxes();
   const card = getCurrentCard();
   drawChoiceLabels(card);
-  if (!state.result) {
+  if (!state.result && !state.calculatingUntil) {
     drawCard(card);
     drawEffectPreview(card);
   }
   drawHint();
   drawFlash();
+  drawCalculating();
   drawResult();
 }
 
 function animate() {
+  if (state.calculatingUntil && !state.result && performance.now() >= state.calculatingUntil) {
+    state.calculatingUntil = 0;
+    state.result = getEnding();
+  }
+
   if (state.exiting) {
     const direction = state.exiting.direction === "right" ? 1 : -1;
     const speed = state.exiting.speed ?? 1;
@@ -1256,9 +1541,26 @@ function animate() {
 }
 
 function startDrag(event) {
-  if (state.result) return;
-  if (state.exiting) return;
+  state.pointer.x = event.clientX;
+  state.pointer.y = event.clientY;
   const point = { x: event.clientX, y: event.clientY };
+  if (state.result) {
+    if (state.resultActionBoxes?.share && isPointInside(point, state.resultActionBoxes.share)) {
+      shareResult();
+      return;
+    }
+    if (state.resultActionBoxes?.retry && isPointInside(point, state.resultActionBoxes.retry)) {
+      restart();
+      return;
+    }
+    if (state.resultActionBoxes?.site && isPointInside(point, state.resultActionBoxes.site)) {
+      openSummitSite();
+      return;
+    }
+    return;
+  }
+  if (state.calculatingUntil) return;
+  if (state.exiting) return;
   const cardButtons = getCardChoiceHitBoxes();
   if (isPointInside(point, cardButtons.left)) {
     choose("left", 0.58);
@@ -1289,7 +1591,9 @@ function startDrag(event) {
 }
 
 function moveDrag(event) {
-  if (!state.drag.active || state.exiting || state.result) return;
+  state.pointer.x = event.clientX;
+  state.pointer.y = event.clientY;
+  if (!state.drag.active || state.exiting || state.result || state.calculatingUntil) return;
   state.drag.x = event.clientX;
   state.drag.y = event.clientY;
   state.cardX = event.clientX - state.drag.startX;
@@ -1302,7 +1606,10 @@ function isPointInside(point, box) {
 }
 
 function endDrag(event) {
-  if (!state.drag.active || state.exiting || state.result) return;
+  if (state.result) {
+    return;
+  }
+  if (!state.drag.active || state.exiting || state.calculatingUntil) return;
   state.drag.active = false;
   canvas.releasePointerCapture(event.pointerId);
   const threshold = isDesktopLayout() ? Math.min(150, state.width * 0.16) : Math.min(116, state.width * 0.28);
@@ -1312,7 +1619,7 @@ function endDrag(event) {
 }
 
 function choose(direction, speed = 1) {
-  if (state.exiting || state.result) return;
+  if (state.exiting || state.result || state.calculatingUntil) return;
   state.exiting = { direction, speed };
   state.rotation = direction === "right" ? 0.24 : -0.24;
 }
@@ -1330,13 +1637,43 @@ function finishChoice(direction) {
   };
   state.index += 1;
   if (state.index >= MAX_TURNS) {
-    state.result = getEnding();
+    state.calculatingUntil = performance.now() + 2600;
   }
 }
 
 function getEnding() {
-  const key = `${stats.x >= 0 ? "+" : "-"}${stats.y >= 0 ? "+" : "-"}${stats.z >= 0 ? "+" : "-"}`;
-  return endings[key];
+  return endings[getEndingKey()];
+}
+
+function getEndingKey() {
+  return `${stats.x >= 0 ? "+" : "-"}${stats.y >= 0 ? "+" : "-"}${stats.z >= 0 ? "+" : "-"}`;
+}
+
+function openSummitSite() {
+  const opened = window.open(SUMMIT_URL, "_self");
+  if (!opened) {
+    window.location.assign(SUMMIT_URL);
+  }
+}
+
+function shareResult() {
+  const shareData = {
+    title: "\u516c\u6c11\u5ea7\u6a19\uff1a\u4f60\u7684\u793e\u6703\u53c3\u8207\u89d2\u8272\u6e2c\u9a57",
+    text: `${state.result.role}\uff1a${state.result.summary}`,
+    url: window.location.href,
+  };
+  if (navigator.share) {
+    navigator.share(shareData).catch(() => {});
+    return;
+  }
+  if (navigator.clipboard?.writeText) {
+    navigator.clipboard.writeText(`${shareData.title}` + "\n" + `${shareData.text}` + "\n" + `${shareData.url}`).catch(() => {});
+  }
+}
+
+function clearPointer() {
+  state.pointer.x = -9999;
+  state.pointer.y = -9999;
 }
 
 function restart() {
@@ -1350,7 +1687,10 @@ function restart() {
   state.rotation = 0;
   state.exiting = null;
   state.flash = null;
+  state.calculatingUntil = 0;
   state.result = null;
+  state.resultCloseBox = null;
+  state.resultActionBoxes = null;
 }
 
 function handleKeydown(event) {
@@ -1361,10 +1701,6 @@ function handleKeydown(event) {
   if (event.key === "ArrowRight") {
     event.preventDefault();
     choose("right", 0.58);
-  }
-  if ((event.key === "Enter" || event.key === " ") && state.result) {
-    event.preventDefault();
-    restart();
   }
 }
 
@@ -1382,6 +1718,7 @@ canvas.addEventListener("pointerdown", startDrag);
 canvas.addEventListener("pointermove", moveDrag);
 canvas.addEventListener("pointerup", endDrag);
 canvas.addEventListener("pointercancel", endDrag);
+canvas.addEventListener("pointerleave", clearPointer);
 leftButton.addEventListener("click", () => choose("left", 0.58));
 rightButton.addEventListener("click", () => choose("right", 0.58));
 
