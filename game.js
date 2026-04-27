@@ -309,7 +309,7 @@ const endings = {
   "--+": {
     role: "體制修補手",
     rope: "細緻而堅韌的絲線",
-    image: "./assets/endings/system-repairer.png",
+    image: "./assets/endings/system-repairer.webp",
     fallbackImage: "./assets/endings/system-repairer.svg",
     summary: "你不一定站在聚光燈下，但你會在科層縫隙裡補上保護網，照顧那些規則沒有看見的人。",
     traits: ["自主隱私：你重視人的尊嚴和安全感。", "韌性連結：你會先把人接住。", "政府體制：你熟悉制度，也知道它哪裡需要修補。"],
@@ -317,7 +317,7 @@ const endings = {
   "++-": {
     role: "議題擴音器",
     rope: "鮮紅色的警示帶",
-    image: "./assets/endings/issue-amplifier.png",
+    image: "./assets/endings/issue-amplifier.webp",
     fallbackImage: "./assets/endings/issue-amplifier.svg",
     summary: "你擅長讓被忽略的問題出圈。當不公義被壓低音量，你會把它變成公共討論。",
     traits: ["開放透明：你相信資訊公開能創造壓力。", "思辨監督：你會指出問題和責任。", "民間草根：你習慣從街頭、網路和社群發動。"],
@@ -325,7 +325,7 @@ const endings = {
   "-+-": {
     role: "邊緣守望犬",
     rope: "帶刺的刺網繩",
-    image: "./assets/endings/edge-watcher.png",
+    image: "./assets/endings/edge-watcher.webp",
     fallbackImage: "./assets/endings/edge-watcher.svg",
     summary: "你對任何形式的權力都保持警覺。即使主流民意很大聲，你仍會守住少數者的位置。",
     traits: ["自主隱私：你在意邊界和安全。", "思辨監督：你不輕易被集體情緒帶走。", "民間草根：你相信體制外也有重要真相。"],
@@ -333,7 +333,7 @@ const endings = {
   "+--": {
     role: "社群點火員",
     rope: "彩色、多股編織的露營繩",
-    image: "./assets/endings/community-igniter.png",
+    image: "./assets/endings/community-igniter.webp",
     fallbackImage: "./assets/endings/community-igniter.svg",
     summary: "你相信改變要從生活周遭做起。比起只指出錯誤，你更喜歡動手把人聚在一起。",
     traits: ["開放透明：你願意分享資源，讓大家都能參與。", "韌性連結：你擅長創造互助的溫度。", "民間草根：你把改變放在日常現場。"],
@@ -341,7 +341,7 @@ const endings = {
   "---": {
     role: "地火互助靈",
     rope: "溫暖、耐操、充滿泥土氣息的麻繩",
-    image: "./assets/endings/mutual-aid-spirit.png",
+    image: "./assets/endings/mutual-aid-spirit.webp",
     fallbackImage: "./assets/endings/mutual-aid-spirit.svg",
     summary: "你相信真正能撐過危機的是彼此。你不急著曝光，而是建立可靠的互助網，在需要時快速接應。",
     traits: ["自主隱私：你重視信任和安全邊界。", "韌性連結：你先照顧人，再討論制度。", "民間草根：你相信底層互助能長出力量。"],
